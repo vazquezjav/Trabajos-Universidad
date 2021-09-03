@@ -1,0 +1,28 @@
+import logica.Consultas;
+
+public class Ges {
+
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String[] args) {
+        // TODO code application logic here
+        
+        Conexion_Oracle co = new Conexion_Oracle();
+        Consultas con = new Consultas();
+        
+        co.setUrl("jdbc:oracle:thin:@localhost:1521:XE");
+        co.setUsername("hr");
+        co.setPassword("Password");
+        
+        co.Conectar();
+        if(co.getConexion() != null){
+            System.out.println("La base de ha conectado exitosamente!");
+            con.ConsultarRegions(co, "1");
+            con.ConsultarLocations(co, "2600");
+            con.ConsultarCountries(co, "IL");
+            co.CerrarConexion();
+        }
+    }
+    
+}

@@ -1,0 +1,34 @@
+
+package basesdistribuidas;
+
+import ec.edu.edu.bd.Conexion;
+import ec.edu.edu.bd.Consultas;
+
+/**
+ *
+ * @author Alex Reinoso
+ */
+public class BasesDistribuidas {
+
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String[] args) {
+        
+        Conexion con = new Conexion();
+        Consultas cons = new Consultas();
+        
+        con.setUrl("jdbdc:oracle:thin:@localhost:1521:orcl");
+        con.setUsername("hr");
+        con.setPassword("Password");
+        con.Conectar();
+        
+        if (con.getConexion() != null){
+            System.out.print("La BD esta conectada");
+            cons.ConsultarEmployees(con, "105");
+            con.CerrarConexion();
+        }
+        
+    }
+    
+}

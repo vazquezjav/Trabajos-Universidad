@@ -1,0 +1,49 @@
+package Vista;
+
+import java.awt.BorderLayout;
+import java.awt.FlowLayout;
+
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+
+import Conexion.Conexion;
+import Conexion.Conexion2;
+import Logica.Consulta;
+import Logica.ConsultaJob;
+
+/**
+ * Llamamos a la clase ya creada para visualizar la tabla(ModeloTrabajo).
+ * 
+ * @author danie
+ *
+ */
+
+public class TablaTrabajo extends JFrame {
+
+	private ConsultaJob con;
+	private Conexion2 co;
+	private JTable tblTrabajos;
+
+	public TablaTrabajo(ConsultaJob con, Conexion2 co) {
+		this.con = con;
+		this.co = co;
+		setSize(150, 200);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		getContentPane().setLayout(new BorderLayout());
+
+		JPanel pnlTitulo = new JPanel(new FlowLayout());
+		JLabel lblTitulo = new JLabel("Consulta Localidades");
+		pnlTitulo.add(lblTitulo);
+		tblTrabajos = new JTable();
+		tblTrabajos.setModel(new ModeloRegion());
+		JScrollPane scrollPaneTabla = new JScrollPane(tblTrabajos);
+		getContentPane().add(pnlTitulo, BorderLayout.NORTH);
+		getContentPane().add(scrollPaneTabla, BorderLayout.CENTER);
+
+		tblTrabajos.setModel(new ModeloTrabajo(con.getTrabajos()));
+
+	}
+}

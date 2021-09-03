@@ -1,0 +1,22 @@
+//import logica.Consultas;
+public class Ges {
+
+ 
+    public static void main(String[] args) {
+        // TODO code application logic here
+   
+        Conexion_Oracle co = new Conexion_Oracle();
+        Consultas con = new Consultas();
+        co.setUrl("0jdbdc:oracle:thin:@localhost:1521:XE");
+        co.setUsername("hr");
+        co.setPassword("hr");
+        co.Conectar();
+        
+        if(co.getConexion() != null){
+            System.out.println("La base de ha conectado");
+            con.ConsultarEmployees(co, "105");
+            co.CerrarConexion();
+        }
+    }
+    
+}
